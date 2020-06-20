@@ -10,32 +10,46 @@ set -e
 cd $(dirname $0)
 . ./machine.conf
 
-echo "Demo Installer: platform: $platform"
+installer_dir=$(pwd)
 
-install_uimage() {
-    echo "Copying uImage to NOR flash:"
-    flashcp -v demo-${platform}.itb $mtd_dev
+echo "ONIE NOS Installer: platform: $platform"
+
+create_partition() {
+	fdisk /dev/mmcblk1 <<EOF
+o
+n
+p
+1
+315
+
+p
+w
+EOF
+	mkfs.ext4 /dev/mmcblk1p1
 }
 
-hw_load() {
-    echo "cp.b $img_start \$loadaddr $img_sz"
+install_uimage() {
+	echo "Installing $platform rootfs"
+	create_partition
+	mkdir /tmpfs
+	mount -t ext4 /dev/mmcblk1p1 /tmpfs
+	cd /tmpfs && xz -dc < $installer_dir/arm-ti_bone-r0.initrd | cpio -idm && cd /
+	sync
+	umount /tmpfs
 }
 
 . ./platform.conf
 
 install_uimage
 
-hw_load_str="$(hw_load)"
-
 echo "Updating U-Boot environment variables"
 (cat <<EOF
-hw_load $hw_load_str
-copy_img echo "Loading Demo $platform image..." && run hw_load
-nos_bootcmd run copy_img && setenv bootargs quiet console=\$consoledev,\$baudrate && bootm \$loadaddr
+nos_initargs setenv bootargs console=\$consoledev,\$baudrate root=/dev/mmcblk1p1 rw rootfstype=ext4;
+nos_bootcmd ext4load mmc 1:1 \$kernel_addr_r /vmlinuz; ext4load mmc 1:1 \$fdt_addr_r /dtb; run nos_initargs; bootz \$kernel_addr_r - \$fdt_addr_r;
 EOF
 ) > /tmp/env.txt
 
-fw_setenv -f -s /tmp/env.txt
+fw_setenv -s /tmp/env.txt
 
 cd /
 
