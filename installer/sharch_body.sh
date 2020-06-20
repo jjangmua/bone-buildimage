@@ -29,9 +29,9 @@ echo " OK."
 cur_wd=$(pwd)
 archive_path=$(realpath "$0")
 tmp_dir=$(mktemp -d)
-if [ "$(id -u)" = "0" ] ; then
-    mount -t tmpfs tmpfs-installer $tmp_dir || exit 1
-fi
+#if [ "$(id -u)" = "0" ] ; then
+#    mount -t tmpfs tmpfs-installer $tmp_dir || exit 1
+#fi
 cd $tmp_dir
 echo -n "Preparing image archive ..."
 sed -e '1,/^exit_marker$/d' $archive_path | tar xf - || exit 1
@@ -50,9 +50,9 @@ $tmp_dir/installer/install.sh
 rc="$?"
 
 # clean up
-if [ "$(id -u)" = "0" ] ; then
-    umount $tmp_dir
-fi
+#if [ "$(id -u)" = "0" ] ; then
+#    umount $tmp_dir
+#fi
 rm -rf $tmp_dir
 
 exit $rc
