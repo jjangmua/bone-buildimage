@@ -48,7 +48,9 @@ all:
 	@umount -n $(ROOTFS_DIR)/sys
 
 	@echo "==== Copy overlay file to $(PLATFORM) rootfs ===="
-	@cp -vrf $(OVERLAY_DIR)/* $(ROOTFS_DIR);
+	@if [ "$$(ls -A $(OVERLAY_DIR))" ]; then \
+		cp -rvf $(OVERLAY_DIR)/* $(ROOTFS_DIR); \
+	fi
 
 	@echo "==== Create xz compressed $(PLATFORM) rootfs ===="
 	@fakeroot -- $(SCRIPT_DIR)/make-sysroot.sh $(ROOTFS_DIR) $(ROOTFS_CPIO)
