@@ -10,6 +10,7 @@ apt-get -y install --no-install-recommends linux-modules-4.15.0-106-generic
 apt-get -y install bash-completion
 apt-get -y install minicom
 apt-get -y install ser2net
+apt-get -y install telnet
 apt-get clean
 
 ln -s /lib/firmware/4.15.0-106-generic/device-tree/am335x-bonegreen.dtb /dtb
