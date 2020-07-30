@@ -1,0 +1,18 @@
+# USB-Serials 16 Ports
+
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.4:1.1", SYMLINK+="ttySerialPort1"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.4:1.0", SYMLINK+="ttySerialPort2"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.4:1.3", SYMLINK+="ttySerialPort3"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.4:1.2", SYMLINK+="ttySerialPort4"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.1:1.0", SYMLINK+="ttySerialPort5"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.1:1.1", SYMLINK+="ttySerialPort6"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.1:1.2", SYMLINK+="ttySerialPort7"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.1:1.3", SYMLINK+="ttySerialPort8"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.3:1.3", SYMLINK+="ttySerialPort9"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.3:1.1", SYMLINK+="ttySerialPort10"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.3:1.0", SYMLINK+="ttySerialPort11"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.3:1.2", SYMLINK+="ttySerialPort12"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.2:1.0", SYMLINK+="ttySerialPort13"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.2:1.1", SYMLINK+="ttySerialPort14"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.2:1.2", SYMLINK+="ttySerialPort15"
+KERNEL=="ttyUSB*", SUBSYSTEM=="tty", SUBSYSTEMS=="usb", KERNELS=="1-1.2:1.3", SYMLINK+="ttySerialPort16"
